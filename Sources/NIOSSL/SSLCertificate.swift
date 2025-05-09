@@ -50,10 +50,7 @@ import struct Glibc.time_t
 /// to obtain an in-memory representation of a TLS certificate from a buffer of
 /// bytes or from a file path.
 public final class NIOSSLCertificate {
-    @usableFromInline
     internal let _ref: OpaquePointer  //<X509>
-
-    @inlinable
     internal func withUnsafeMutableX509Pointer<ResultType>(
         _ body: (OpaquePointer) throws -> ResultType
     ) rethrows -> ResultType {

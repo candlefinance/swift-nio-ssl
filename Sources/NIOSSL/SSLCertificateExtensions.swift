@@ -79,7 +79,7 @@ extension NIOSSLCertificate {
             }
         }
 
-        @usableFromInline internal let stackSize: Int
+        internal let stackSize: Int
         private let storage: Storage
 
         internal init(takeOwnershipOf reference: OpaquePointer?) {
@@ -120,8 +120,8 @@ extension NIOSSLCertificate._Extensions: RandomAccessCollection {
         }
     }
 
-    @inlinable public var startIndex: Int { 0 }
-    @inlinable public var endIndex: Int { self.stackSize }
+    public var startIndex: Int { 0 }
+    public var endIndex: Int { self.stackSize }
 }
 
 extension NIOSSLCertificate {
@@ -181,21 +181,21 @@ extension NIOSSLCertificate._Extension {
         // only part of this type to keep a strong reference to the underlying storage of `buffer`
         private let owner: AnyObject
         // lifetime automatically managed by `owner`
-        @usableFromInline internal let buffer: UnsafeBufferPointer<UInt8>
+        internal let buffer: UnsafeBufferPointer<UInt8>
 
         internal init(buffer: UnsafeBufferPointer<UInt8>, owner: AnyObject) {
             self.buffer = buffer
             self.owner = owner
         }
 
-        @inlinable public func withUnsafeBufferPointer<Result>(
+        public func withUnsafeBufferPointer<Result>(
             _ body: (UnsafeBufferPointer<UInt8>) throws -> Result
         ) rethrows -> Result {
             try withExtendedLifetime(self) {
                 try body(self.buffer)
             }
         }
-        @inlinable public func withUnsafeBytes<Result>(
+        public func withUnsafeBytes<Result>(
             _ body: (UnsafeRawBufferPointer) throws -> Result
         ) rethrows -> Result {
             try withExtendedLifetime(self) {
@@ -209,15 +209,15 @@ extension NIOSSLCertificate._Extension {
 extension NIOSSLCertificate._Extension.Data: @unchecked Sendable {}
 
 extension NIOSSLCertificate._Extension.Data: RandomAccessCollection {
-    @inlinable public var startIndex: Int { self.buffer.startIndex }
-    @inlinable public var endIndex: Int { self.buffer.endIndex }
+    public var startIndex: Int { self.buffer.startIndex }
+    public var endIndex: Int { self.buffer.endIndex }
 
-    @inlinable public subscript(position: Int) -> UInt8 {
+    public subscript(position: Int) -> UInt8 {
         precondition(self.indices.contains(position), "index \(position) out of bounds")
         return withUnsafeBufferPointer { $0[position] }
     }
 
-    @inlinable public func withContiguousStorageIfAvailable<Result>(
+    public func withContiguousStorageIfAvailable<Result>(
         _ body: (UnsafeBufferPointer<UInt8>) throws -> Result
     ) rethrows -> Result? {
         try withUnsafeBufferPointer(body)
