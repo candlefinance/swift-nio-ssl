@@ -36,12 +36,10 @@ import Android
 
 /// Collection of all Subject Alternative Names from a `NIOSSLCertificate`
 public struct _SubjectAlternativeNames {
-
-    @usableFromInline
     internal final class Storage {
 
         fileprivate let nameStack: OpaquePointer?
-        @usableFromInline internal let stackSize: Int
+        internal let stackSize: Int
 
         internal init(nameStack: OpaquePointer?) {
             self.nameStack = nameStack
@@ -71,7 +69,7 @@ public struct _SubjectAlternativeNames {
         }
     }
 
-    @usableFromInline internal var storage: Storage
+    internal var storage: Storage
 
     internal init(nameStack: OpaquePointer?) {
         self.storage = .init(nameStack: nameStack)
@@ -86,13 +84,13 @@ extension _SubjectAlternativeNames.Storage: @unchecked Sendable {}
 
 extension _SubjectAlternativeNames: RandomAccessCollection {
 
-    @inlinable public subscript(position: Int) -> _SubjectAlternativeName {
+    public subscript(position: Int) -> _SubjectAlternativeName {
         precondition(self.indices.contains(position), "index \(position) out of bounds")
         return self.storage[position]
     }
 
-    @inlinable public var startIndex: Int { 0 }
-    @inlinable public var endIndex: Int { self.storage.stackSize }
+    public var startIndex: Int { 0 }
+    public var endIndex: Int { self.storage.stackSize }
 }
 
 public struct _SubjectAlternativeName {
@@ -118,14 +116,14 @@ public struct _SubjectAlternativeName {
         // only part of this type to keep a strong reference to the underlying storage of `buffer`
         private let collection: _SubjectAlternativeNames.Storage
         // lifetime automatically managed by `collection`
-        @usableFromInline internal let buffer: UnsafeBufferPointer<UInt8>
+        internal let buffer: UnsafeBufferPointer<UInt8>
 
         internal init(collection: _SubjectAlternativeNames.Storage, buffer: UnsafeBufferPointer<UInt8>) {
             self.collection = collection
             self.buffer = buffer
         }
 
-        @inlinable public func withUnsafeBufferPointer<Result>(
+        public func withUnsafeBufferPointer<Result>(
             _ body: (UnsafeBufferPointer<UInt8>) throws -> Result
         ) rethrows -> Result {
             try body(self.buffer)
@@ -150,10 +148,10 @@ extension _SubjectAlternativeName.Contents: @unchecked Sendable {}
 
 extension _SubjectAlternativeName.Contents: RandomAccessCollection {
 
-    @inlinable public var startIndex: Int { self.buffer.startIndex }
-    @inlinable public var endIndex: Int { self.buffer.endIndex }
+    public var startIndex: Int { self.buffer.startIndex }
+    public var endIndex: Int { self.buffer.endIndex }
 
-    @inlinable public subscript(position: Int) -> UInt8 {
+    public subscript(position: Int) -> UInt8 {
         precondition(self.indices.contains(position), "index \(position) out of bounds")
         return self.buffer[position]
     }

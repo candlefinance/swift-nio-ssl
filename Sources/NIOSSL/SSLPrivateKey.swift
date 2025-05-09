@@ -118,13 +118,10 @@ func globalBoringSSLPassphraseCallback(
 /// to obtain an in-memory representation of a key from a buffer of
 /// bytes or from a file path.
 public final class NIOSSLPrivateKey {
-    @usableFromInline
     internal enum Representation {
         case native(OpaquePointer)  // <EVP_PKEY>
         case custom(AnyNIOSSLCustomPrivateKey)
     }
-
-    @usableFromInline
     internal let representation: Representation
 
     internal func withUnsafeMutableEVPPKEYPointer<ReturnType>(
@@ -322,7 +319,6 @@ public final class NIOSSLPrivateKey {
     ///
     /// - parameters:
     ///     - customPrivateKey: The custom private key to use with the TLS certificate.
-    @inlinable
     public init<CustomKey: NIOSSLCustomPrivateKey & Hashable>(customPrivateKey: CustomKey) {
         self.representation = .custom(AnyNIOSSLCustomPrivateKey(customPrivateKey))
     }

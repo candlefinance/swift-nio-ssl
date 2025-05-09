@@ -81,39 +81,38 @@ public protocol NIOSSLCustomPrivateKey: _NIOPreconcurrencySendable {
 }
 
 extension NIOSSLCustomPrivateKey {
-    @inlinable public var derBytes: [UInt8] { [] }
+    public var derBytes: [UInt8] { [] }
 }
 
 /// This is a type-erased wrapper that can be used to encapsulate a NIOSSLCustomPrivateKey and provide it with
 /// hashability and equatability.
 ///
 /// While generally speaking type-erasure has some nasty performance problems, we need the type-erasure for Hashable conformance.
-@usableFromInline
 internal struct AnyNIOSSLCustomPrivateKey: NIOSSLCustomPrivateKey, Hashable {
-    @usableFromInline let _value: NIOSSLCustomPrivateKey
+    let _value: NIOSSLCustomPrivateKey
 
-    @usableFromInline let _equalsFunction: @Sendable (NIOSSLCustomPrivateKey) -> Bool
-    @usableFromInline let _hashFunction: @Sendable (inout Hasher) -> Void
+    let _equalsFunction: @Sendable (NIOSSLCustomPrivateKey) -> Bool
+    let _hashFunction: @Sendable (inout Hasher) -> Void
 
-    @inlinable init<CustomKey: NIOSSLCustomPrivateKey & Hashable>(_ key: CustomKey) {
+    init<CustomKey: NIOSSLCustomPrivateKey & Hashable>(_ key: CustomKey) {
         self._value = key
         self._equalsFunction = { ($0 as? CustomKey) == key }
         self._hashFunction = { $0.combine(key) }
     }
 
-    // This method does not need to be @inlinable for performance, but it needs to be _at least_
-    // @usableFromInline as it's a protocol requirement on a @usableFromInline type.
-    @inlinable var signatureAlgorithms: [SignatureAlgorithm] {
+    // This method does not need to be for performance, but it needs to be _at least_
+    // as it's a protocol requirement on a type.
+    var signatureAlgorithms: [SignatureAlgorithm] {
         self._value.signatureAlgorithms
     }
 
-    @inlinable var derBytes: [UInt8] {
+    var derBytes: [UInt8] {
         self._value.derBytes
     }
 
     // This method does not need to be @inlinable for performance, but it needs to be _at least_
     // @usableFromInline as it's a protocol requirement on a @usableFromInline type.
-    @inlinable func sign(
+    func sign(
         channel: Channel,
         algorithm: SignatureAlgorithm,
         data: ByteBuffer
@@ -121,21 +120,21 @@ internal struct AnyNIOSSLCustomPrivateKey: NIOSSLCustomPrivateKey, Hashable {
         self._value.sign(channel: channel, algorithm: algorithm, data: data)
     }
 
-    // This method does not need to be @inlinable for performance, but it needs to be _at least_
-    // @usableFromInline as it's a protocol requirement on a @usableFromInline type.
-    @inlinable func decrypt(channel: Channel, data: ByteBuffer) -> EventLoopFuture<ByteBuffer> {
+    // This method does not need to be for performance, but it needs to be _at least_
+    // as it's a protocol requirement on a type.
+    func decrypt(channel: Channel, data: ByteBuffer) -> EventLoopFuture<ByteBuffer> {
         self._value.decrypt(channel: channel, data: data)
     }
 
-    // This method does not need to be @inlinable for performance, but it needs to be _at least_
-    // @usableFromInline as it's a protocol requirement on a @usableFromInline type.
-    @inlinable func hash(into hasher: inout Hasher) {
+    // This method does not need to be for performance, but it needs to be _at least_
+    // as it's a protocol requirement on a type.
+    func hash(into hasher: inout Hasher) {
         self._hashFunction(&hasher)
     }
 
-    // This method does not need to be @inlinable for performance, but it needs to be _at least_
-    // @usableFromInline as it's a protocol requirement on a @usableFromInline type.
-    @inlinable static func == (lhs: AnyNIOSSLCustomPrivateKey, rhs: AnyNIOSSLCustomPrivateKey) -> Bool {
+    // This method does not need to be for performance, but it needs to be _at least_
+    // as it's a protocol requirement on a type.
+    static func == (lhs: AnyNIOSSLCustomPrivateKey, rhs: AnyNIOSSLCustomPrivateKey) -> Bool {
         lhs._equalsFunction(rhs._value)
     }
 }
