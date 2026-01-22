@@ -74,7 +74,7 @@ let strictConcurrencySettings: [SwiftSetting] = {
 
 // swift-format-ignore: NoBlockComments
 let package = Package(
-    name: "candle-swift-nio-ssl",
+    name: "swift-nio-ssl",
     products: [
         .library(name: "CandleNIOSSL", targets: ["CandleNIOSSL"]),
         /* This target is used only for symbol mangling. It's added and removed automatically because it emits build warnings. MANGLE_START
@@ -105,10 +105,10 @@ let package = Package(
             dependencies: [
                 "CandleCNIOBoringSSL",
                 "CandleCNIOBoringSSLShims",
-                .product(name: "CandleNIO", package: "candle-swift-nio"),
-                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
-                .product(name: "CandleNIOConcurrencyHelpers", package: "candle-swift-nio"),
-                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
+                .product(name: "CandleNIO", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOConcurrencyHelpers", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             exclude: includePrivacyManifest ? [] : ["PrivacyInfo.xcprivacy"],
             resources: includePrivacyManifest ? [.copy("PrivacyInfo.xcprivacy")] : [],
@@ -118,9 +118,9 @@ let package = Package(
             name: "NIOSSLPerformanceTester",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
-                .product(name: "CandleNIOEmbedded", package: "candle-swift-nio"),
-                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),
@@ -128,10 +128,10 @@ let package = Package(
             name: "NIOSSLTests",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
-                .product(name: "CandleNIOEmbedded", package: "candle-swift-nio"),
-                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
-                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
+                .product(name: "CandleNIOPosix", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),
