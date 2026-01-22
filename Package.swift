@@ -77,8 +77,6 @@ let package = Package(
     name: "candle-swift-nio-ssl",
     products: [
         .library(name: "CandleNIOSSL", targets: ["CandleNIOSSL"]),
-        .executable(name: "NIOTLSServer", targets: ["NIOTLSServer"]),
-        .executable(name: "NIOSSLHTTP1Client", targets: ["NIOSSLHTTP1Client"]),
         /* This target is used only for symbol mangling. It's added and removed automatically because it emits build warnings. MANGLE_START
                 .library(name: "CandleCNIOBoringSSL", type: .static, targets: ["CandleCNIOBoringSSL"]),
         MANGLE_END */
@@ -114,33 +112,6 @@ let package = Package(
             ],
             exclude: includePrivacyManifest ? [] : ["PrivacyInfo.xcprivacy"],
             resources: includePrivacyManifest ? [.copy("PrivacyInfo.xcprivacy")] : [],
-            swiftSettings: strictConcurrencySettings
-        ),
-        .executableTarget(
-            name: "NIOTLSServer",
-            dependencies: [
-                "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
-                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
-                .product(name: "CandleNIOConcurrencyHelpers", package: "candle-swift-nio"),
-            ],
-            exclude: [
-                "README.md"
-            ],
-            swiftSettings: strictConcurrencySettings
-        ),
-        .executableTarget(
-            name: "NIOSSLHTTP1Client",
-            dependencies: [
-                "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
-                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
-                .product(name: "CandleNIOHTTP1", package: "candle-swift-nio"),
-                .product(name: "CandleNIOFoundationCompat", package: "candle-swift-nio"),
-            ],
-            exclude: [
-                "README.md"
-            ],
             swiftSettings: strictConcurrencySettings
         ),
         .executableTarget(
