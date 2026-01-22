@@ -12,14 +12,14 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 #if compiler(>=6.1)
-internal import CNIOBoringSSL
-internal import CNIOBoringSSLShims
+internal import CandleCNIOBoringSSL
+internal import CandleCNIOBoringSSLShims
 #else
-@_implementationOnly import CNIOBoringSSL
-@_implementationOnly import CNIOBoringSSLShims
+@_implementationOnly import CandleCNIOBoringSSL
+@_implementationOnly import CandleCNIOBoringSSLShims
 #endif
 
 #if canImport(Darwin)

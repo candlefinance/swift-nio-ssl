@@ -11,12 +11,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 //===----------------------------------------------------------------------===//
-import NIOCore
+import CandleNIOCore
 
 #if compiler(>=6.1)
-internal import CNIOBoringSSL
+internal import CandleCNIOBoringSSL
 #else
-@_implementationOnly import CNIOBoringSSL
+@_implementationOnly import CandleCNIOBoringSSL
 #endif
 
 // We can only use Security.framework to validate TLS certificates on Apple platforms.

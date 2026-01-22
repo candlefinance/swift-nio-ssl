@@ -13,11 +13,11 @@
 //===----------------------------------------------------------------------===//
 
 import Foundation
-import NIOCore
-import NIOFoundationCompat
-import NIOHTTP1
-import NIOPosix
-import NIOSSL
+import CandleNIOCore
+import CandleNIOFoundationCompat
+import CandleNIOHTTP1
+import CandleNIOPosix
+import CandleNIOSSL
 
 private final class HTTPResponseHandler: ChannelInboundHandler {
 

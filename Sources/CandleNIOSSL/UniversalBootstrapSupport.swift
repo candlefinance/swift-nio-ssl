@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 /// A TLS provider to bootstrap TLS-enabled connections with `NIOClientTCPBootstrap`.
 ///

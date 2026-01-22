@@ -76,17 +76,17 @@ let strictConcurrencySettings: [SwiftSetting] = {
 let package = Package(
     name: "swift-nio-ssl",
     products: [
-        .library(name: "NIOSSL", targets: ["NIOSSL"]),
+        .library(name: "CandleNIOSSL", targets: ["CandleNIOSSL"]),
         .executable(name: "NIOTLSServer", targets: ["NIOTLSServer"]),
         .executable(name: "NIOSSLHTTP1Client", targets: ["NIOSSLHTTP1Client"]),
         /* This target is used only for symbol mangling. It's added and removed automatically because it emits build warnings. MANGLE_START
-                .library(name: "CNIOBoringSSL", type: .static, targets: ["CNIOBoringSSL"]),
+                .library(name: "CandleCNIOBoringSSL", type: .static, targets: ["CandleCNIOBoringSSL"]),
         MANGLE_END */
     ],
     dependencies: generateDependencies(),
     targets: [
         .target(
-            name: "CNIOBoringSSL",
+            name: "CandleCNIOBoringSSL",
             cSettings: [
                 .define("_GNU_SOURCE"),
                 .define("_POSIX_C_SOURCE", to: "200112L"),
@@ -94,23 +94,23 @@ let package = Package(
             ]
         ),
         .target(
-            name: "CNIOBoringSSLShims",
+            name: "CandleCNIOBoringSSLShims",
             dependencies: [
-                "CNIOBoringSSL"
+                "CandleCNIOBoringSSL"
             ],
             cSettings: [
                 .define("_GNU_SOURCE")
             ]
         ),
         .target(
-            name: "NIOSSL",
+            name: "CandleNIOSSL",
             dependencies: [
-                "CNIOBoringSSL",
-                "CNIOBoringSSLShims",
-                .product(name: "NIO", package: "swift-nio"),
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOConcurrencyHelpers", package: "swift-nio"),
-                .product(name: "NIOTLS", package: "swift-nio"),
+                "CandleCNIOBoringSSL",
+                "CandleCNIOBoringSSLShims",
+                .product(name: "CandleNIO", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOConcurrencyHelpers", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             exclude: includePrivacyManifest ? [] : ["PrivacyInfo.xcprivacy"],
             resources: includePrivacyManifest ? [.copy("PrivacyInfo.xcprivacy")] : [],
@@ -119,10 +119,10 @@ let package = Package(
         .executableTarget(
             name: "NIOTLSServer",
             dependencies: [
-                "NIOSSL",
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio"),
-                .product(name: "NIOConcurrencyHelpers", package: "swift-nio"),
+                "CandleNIOSSL",
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOPosix", package: "swift-nio"),
+                .product(name: "CandleNIOConcurrencyHelpers", package: "swift-nio"),
             ],
             exclude: [
                 "README.md"
@@ -132,11 +132,11 @@ let package = Package(
         .executableTarget(
             name: "NIOSSLHTTP1Client",
             dependencies: [
-                "NIOSSL",
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio"),
-                .product(name: "NIOHTTP1", package: "swift-nio"),
-                .product(name: "NIOFoundationCompat", package: "swift-nio"),
+                "CandleNIOSSL",
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOPosix", package: "swift-nio"),
+                .product(name: "CandleNIOHTTP1", package: "swift-nio"),
+                .product(name: "CandleNIOFoundationCompat", package: "swift-nio"),
             ],
             exclude: [
                 "README.md"
@@ -146,21 +146,21 @@ let package = Package(
         .executableTarget(
             name: "NIOSSLPerformanceTester",
             dependencies: [
-                "NIOSSL",
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOEmbedded", package: "swift-nio"),
-                .product(name: "NIOTLS", package: "swift-nio"),
+                "CandleNIOSSL",
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),
         .testTarget(
             name: "NIOSSLTests",
             dependencies: [
-                "NIOSSL",
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOEmbedded", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio"),
-                .product(name: "NIOTLS", package: "swift-nio"),
+                "CandleNIOSSL",
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
+                .product(name: "CandleNIOPosix", package: "swift-nio"),
+                .product(name: "CandleNIOTLS", package: "swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),

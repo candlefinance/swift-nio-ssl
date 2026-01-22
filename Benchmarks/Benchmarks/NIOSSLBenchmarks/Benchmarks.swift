@@ -13,9 +13,9 @@
 //===----------------------------------------------------------------------===//
 
 import Benchmark
-import NIOCore
-import NIOEmbedded
-import NIOSSL
+import CandleNIOCore
+import CandleNIOEmbedded
+import CandleNIOSSL
 
 let benchmarks = {
     let defaultMetrics: [BenchmarkMetric] = [

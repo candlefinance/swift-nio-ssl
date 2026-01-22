@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 // This file contains a version of the SwiftNIO Posix enum. This is necessary
 // because SwiftNIO's version is internal. Our version exists for the same reason:

@@ -12,12 +12,12 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 #if compiler(>=6.1)
-internal import CNIOBoringSSL
+internal import CandleCNIOBoringSSL
 #else
-@_implementationOnly import CNIOBoringSSL
+@_implementationOnly import CandleCNIOBoringSSL
 #endif
 
 /// ``NIOSSLCustomPrivateKey`` defines the interface of a custom, non-BoringSSL private key.

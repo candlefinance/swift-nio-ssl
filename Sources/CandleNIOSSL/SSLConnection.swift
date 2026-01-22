@@ -12,12 +12,12 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 #if compiler(>=6.1)
-internal import CNIOBoringSSL
+internal import CandleCNIOBoringSSL
 #else
-@_implementationOnly import CNIOBoringSSL
+@_implementationOnly import CandleCNIOBoringSSL
 #endif
 
 internal let SSL_MAX_RECORD_SIZE = 16 * 1024

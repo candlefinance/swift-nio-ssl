@@ -13,9 +13,9 @@
 //===----------------------------------------------------------------------===//
 
 #if compiler(>=6.1)
-internal import CNIOBoringSSL
+internal import CandleCNIOBoringSSL
 #else
-@_implementationOnly import CNIOBoringSSL
+@_implementationOnly import CandleCNIOBoringSSL
 #endif
 
 /// A ``NIOSSLPublicKey`` is an abstract handle to a public key owned by BoringSSL.

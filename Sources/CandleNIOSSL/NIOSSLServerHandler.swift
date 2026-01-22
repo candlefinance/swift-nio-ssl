@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
+import CandleNIOCore
 
 /// A channel handler that wraps a channel in TLS using NIOSSL. This
 /// handler can be used in channels that are acting as the server in

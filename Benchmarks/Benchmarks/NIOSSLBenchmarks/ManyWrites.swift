@@ -12,9 +12,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
-import NIOEmbedded
-import NIOSSL
+import CandleNIOCore
+import CandleNIOEmbedded
+import CandleNIOSSL
 
 func runManyWrites(writeCount: Int) throws {
     let serverContext = try NIOSSLContext(

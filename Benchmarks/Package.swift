@@ -17,9 +17,9 @@ let package = Package(
             name: "NIOSSLBenchmarks",
             dependencies: [
                 .product(name: "Benchmark", package: "package-benchmark"),
-                .product(name: "NIOSSL", package: "swift-nio-ssl"),
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOEmbedded", package: "swift-nio"),
+                .product(name: "CandleNIOSSL", package: "swift-nio-ssl"),
+                .product(name: "CandleNIOCore", package: "swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
             ],
             path: "Benchmarks/NIOSSLBenchmarks",
             plugins: [

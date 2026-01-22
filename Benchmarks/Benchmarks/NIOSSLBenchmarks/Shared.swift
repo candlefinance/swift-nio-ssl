@@ -12,9 +12,9 @@
 //
 //===----------------------------------------------------------------------===//
 import Foundation
-import NIOCore
-import NIOEmbedded
-import NIOSSL
+import CandleNIOCore
+import CandleNIOEmbedded
+import CandleNIOSSL
 
 class BackToBackEmbeddedChannel {
     private(set) var client: EmbeddedChannel

@@ -12,9 +12,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
-import NIOPosix
-import NIOSSL
+import CandleNIOCore
+import CandleNIOPosix
+import CandleNIOSSL
 
 import struct Foundation.URL
 

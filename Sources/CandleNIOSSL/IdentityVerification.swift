@@ -12,8 +12,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-import CNIOLinux
-import NIOCore
+import CandleCNIOLinux
+import CandleNIOCore
 
 #if canImport(Darwin)
 import Darwin.C

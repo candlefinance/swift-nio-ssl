@@ -12,9 +12,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
-import NIOEmbedded
-import NIOSSL
+import CandleNIOCore
+import CandleNIOEmbedded
+import CandleNIOSSL
 
 final class BenchManyWrites: Benchmark {
     let clientContext: NIOSSLContext

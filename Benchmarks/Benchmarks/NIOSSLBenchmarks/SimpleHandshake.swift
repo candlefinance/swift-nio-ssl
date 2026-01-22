@@ -12,9 +12,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-import NIOCore
-import NIOEmbedded
-import NIOSSL
+import CandleNIOCore
+import CandleNIOEmbedded
+import CandleNIOSSL
 
 func runSimpleHandshake(handshakeCount: Int) throws {
     let serverContext = try NIOSSLContext(
