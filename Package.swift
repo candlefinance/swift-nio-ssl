@@ -74,7 +74,7 @@ let strictConcurrencySettings: [SwiftSetting] = {
 
 // swift-format-ignore: NoBlockComments
 let package = Package(
-    name: "swift-nio-ssl",
+    name: "candle-swift-nio-ssl",
     products: [
         .library(name: "CandleNIOSSL", targets: ["CandleNIOSSL"]),
         .executable(name: "NIOTLSServer", targets: ["NIOTLSServer"]),
