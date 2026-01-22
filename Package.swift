@@ -36,11 +36,11 @@ import class Foundation.ProcessInfo
 func generateDependencies() -> [Package.Dependency] {
     if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
         return [
-            .package(url: "https://github.com/candlefinance/swift-nio.git", branch: "fix-candle-2.82.1")
+            .package(url: "https://github.com/candlefinance/swift-nio.git", name: "candle-swift-nio", branch: "fix-candle-2.82.1")
         ]
     } else {
         return [
-            .package(path: "../swift-nio")
+            .package(path: "../swift-nio", name: "candle-swift-nio")
         ]
     }
 }
@@ -107,10 +107,10 @@ let package = Package(
             dependencies: [
                 "CandleCNIOBoringSSL",
                 "CandleCNIOBoringSSLShims",
-                .product(name: "CandleNIO", package: "swift-nio"),
-                .product(name: "CandleNIOCore", package: "swift-nio"),
-                .product(name: "CandleNIOConcurrencyHelpers", package: "swift-nio"),
-                .product(name: "CandleNIOTLS", package: "swift-nio"),
+                .product(name: "CandleNIO", package: "candle-swift-nio"),
+                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
+                .product(name: "CandleNIOConcurrencyHelpers", package: "candle-swift-nio"),
+                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
             ],
             exclude: includePrivacyManifest ? [] : ["PrivacyInfo.xcprivacy"],
             resources: includePrivacyManifest ? [.copy("PrivacyInfo.xcprivacy")] : [],
@@ -120,9 +120,9 @@ let package = Package(
             name: "NIOTLSServer",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "swift-nio"),
-                .product(name: "CandleNIOPosix", package: "swift-nio"),
-                .product(name: "CandleNIOConcurrencyHelpers", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
+                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
+                .product(name: "CandleNIOConcurrencyHelpers", package: "candle-swift-nio"),
             ],
             exclude: [
                 "README.md"
@@ -133,10 +133,10 @@ let package = Package(
             name: "NIOSSLHTTP1Client",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "swift-nio"),
-                .product(name: "CandleNIOPosix", package: "swift-nio"),
-                .product(name: "CandleNIOHTTP1", package: "swift-nio"),
-                .product(name: "CandleNIOFoundationCompat", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
+                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
+                .product(name: "CandleNIOHTTP1", package: "candle-swift-nio"),
+                .product(name: "CandleNIOFoundationCompat", package: "candle-swift-nio"),
             ],
             exclude: [
                 "README.md"
@@ -147,9 +147,9 @@ let package = Package(
             name: "NIOSSLPerformanceTester",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "swift-nio"),
-                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
-                .product(name: "CandleNIOTLS", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "candle-swift-nio"),
+                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),
@@ -157,10 +157,10 @@ let package = Package(
             name: "NIOSSLTests",
             dependencies: [
                 "CandleNIOSSL",
-                .product(name: "CandleNIOCore", package: "swift-nio"),
-                .product(name: "CandleNIOEmbedded", package: "swift-nio"),
-                .product(name: "CandleNIOPosix", package: "swift-nio"),
-                .product(name: "CandleNIOTLS", package: "swift-nio"),
+                .product(name: "CandleNIOCore", package: "candle-swift-nio"),
+                .product(name: "CandleNIOEmbedded", package: "candle-swift-nio"),
+                .product(name: "CandleNIOPosix", package: "candle-swift-nio"),
+                .product(name: "CandleNIOTLS", package: "candle-swift-nio"),
             ],
             swiftSettings: strictConcurrencySettings
         ),
